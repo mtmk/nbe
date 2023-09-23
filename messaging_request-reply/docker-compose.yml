@@ -1,0 +1,10 @@
+﻿services:
+
+  nats:
+    image: docker.io/nats:2.9.15
+    command: [ -l, /dev/null ]
+
+  app:
+    build: { dockerfile: Dockerfile }
+    environment: [ NATS_URL=nats://nats:4222 ]
+    depends_on: [ nats ]
